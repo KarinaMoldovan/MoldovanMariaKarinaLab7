@@ -49,4 +49,28 @@ public partial class ShopPage : ContentPage
                            }
                        await Map.OpenAsync(shoplocation, options);
                       }
+        async void OnDeleteShopButtonClicked(object sender, EventArgs e)
+        {
+            var shop = (Shop)BindingContext; 
+
+            if (shop != null)
+            {
+                await App.Database.DeleteShopAsync(shop);
+
+             
+                await DisplayAlert("Succes",
+                    $"Magazinul a fost sters cu succes.", "OK");
+
+                
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                
+                await DisplayAlert("Eroare",
+                    "Nu a fost selectat niciun magazin pentru ?tergere.", "OK");
+            }
+        }
+
+
 }
